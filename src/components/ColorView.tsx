@@ -14,20 +14,16 @@ const ColorView: React.FC = () => {
   console.log(colorState);
 
   return (
-    <div
-      className={`${theme === 'dark' ? 'bg-black' : 'bg-white'} h-full p-8 text-center`}
-    >
+    <div className='h-full bg-white p-8 text-center text-black dark:bg-black dark:text-white'>
       <button
         onClick={handleClick}
-        className={`mb-8 rounded-md p-4 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}
+        className='mb-8 rounded-md bg-black p-4 text-white dark:bg-white dark:text-black'
       >
         Switch BG
       </button>
       <div className='flex'>
         <div className='h-full w-32'>
-          <button
-            className={`size-12 rounded-md text-5xl transition-colors duration-200 active:scale-110 ${theme === 'dark' ? 'bg-black text-white hover:bg-white hover:text-black' : 'bg-white text-black hover:bg-black hover:text-white'}`}
-          >
+          <button className='size-12 rounded-md bg-white text-5xl text-black hover:bg-black hover:text-white active:scale-110 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black'>
             <Icon icon={'mdi:plus'}></Icon>
           </button>
         </div>

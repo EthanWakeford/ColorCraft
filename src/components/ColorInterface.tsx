@@ -1,4 +1,3 @@
-import { useColorStore } from '../colorStore';
 import ColorGroup from './ColorGroup';
 
 interface Props {
@@ -6,12 +5,8 @@ interface Props {
 }
 
 const ColorInterface: React.FC<Props> = ({ colorState }) => {
-  const theme = useColorStore((state) => state.theme);
-  console.log(theme);
   return (
-    <div
-      className={`flex-grow ${theme === 'dark' ? 'text-white' : 'text-black'}`}
-    >
+    <div className='flex-grow'>
       {colorState.map((colorGroup) => (
         <ColorGroup key={colorGroup.groupName} colorGroup={colorGroup} />
       ))}

@@ -1,59 +1,37 @@
-import { useState } from 'react';
+import { useColorStore } from '../colorStore';
+import ColorInterface from './ColorInterface';
+import { Icon } from '@iconify/react';
 
 const ColorView: React.FC = () => {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const colorState = useColorStore((state) => state.colorState);
+  const theme = useColorStore((state) => state.theme);
+  const setTheme = useColorStore((state) => state.setTheme);
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+
+  console.log(colorState);
 
   return (
     <div
-      className={`${isClicked ? 'bg-white' : 'bg-black'} h-full p-8 text-center`}
+      className={`${theme === 'dark' ? 'bg-black' : 'bg-white'} h-full p-8 text-center`}
     >
       <button
         onClick={handleClick}
-        className={`mb-8 rounded-md p-4 ${isClicked ? 'bg-black text-white' : 'bg-white text-black'}`}
+        className={`mb-8 rounded-md p-4 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'}`}
       >
         Switch BG
       </button>
-      <div className='flex w-full items-center'>
-        <div className='bg-neutral-1 size-32'></div>
-        <div className='bg-neutral-2 size-32'></div>
-        <div className='bg-neutral-3 size-32'></div>
-        <div className='bg-neutral-4 size-32'></div>
-        <div className='bg-neutral-5 size-32'></div>
-        <div className='bg-neutral-6 size-32'></div>
-        <div className='bg-neutral-7 size-32'></div>
-        <div className='bg-neutral-8 size-32'></div>
-        <div className='bg-neutral-9 size-32'></div>
-        <h2 className={`${isClicked ? 'text-black' : 'text-white'}`}>
-          neutral
-        </h2>
-      </div>
-      <div className='flex w-full items-center'>
-        <div className='bg-primary-dk1 size-32'></div>
-        <div className='bg-primary-dk2 size-32'></div>
-        <div className='bg-primary-md1 size-32'></div>
-        <div className='bg-primary-md2 size-32'></div>
-        <div className='bg-primary-md3 size-32'></div>
-        <div className='bg-primary-lt1 size-32'></div>
-        <div className='bg-primary-lt2 size-32'></div>
-        <h2 className={`${isClicked ? 'text-black' : 'text-white'}`}>
-          primary
-        </h2>
-      </div>
-      <div className='flex w-full'>
-        <div className='bg-secondary-dk1 size-32'></div>
-        <div className='bg-secondary-dk2 size-32'></div>
-        <div className='bg-secondary-md1 size-32'></div>
-        <div className='bg-secondary-md2 size-32'></div>
-        <div className='bg-secondary-md3 size-32'></div>
-        <div className='bg-secondary-lt1 size-32'></div>
-        <div className='bg-secondary-lt2 size-32'></div>
-        <h2 className={`${isClicked ? 'text-black' : 'text-white'}`}>
-          secondary
-        </h2>
+      <div className='flex'>
+        <div className='h-full w-32'>
+          <button
+            className={`size-12 rounded-md text-5xl transition-colors duration-200 active:scale-110 ${theme === 'dark' ? 'bg-black text-white hover:bg-white hover:text-black' : 'bg-white text-black hover:bg-black hover:text-white'}`}
+          >
+            <Icon icon={'mdi:plus'}></Icon>
+          </button>
+        </div>
+        <ColorInterface colorState={colorState} />
       </div>
     </div>
   );

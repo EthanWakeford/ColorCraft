@@ -40,7 +40,6 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
             <input
               className='w-16 bg-neutral-100 text-black'
               type='text'
-              defaultValue={color.colorName}
               name='colorName'
               value={color.colorName}
               onChange={handleInputChange}
@@ -53,7 +52,6 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               <input
                 className='w-8 bg-neutral-100 text-black'
                 type='text'
-                defaultValue={color.hue}
                 name='hue'
                 value={color.hue}
                 onChange={handleInputChange}
@@ -65,7 +63,6 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               <input
                 className='w-8 bg-neutral-100 text-black'
                 type='text'
-                defaultValue={color.saturation}
                 name='saturation'
                 value={color.saturation}
                 onChange={handleInputChange}
@@ -77,7 +74,6 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               <input
                 className='w-8 bg-neutral-100 text-black'
                 type='text'
-                defaultValue={color.lightness}
                 name='lightness'
                 value={color.lightness}
                 onChange={handleInputChange}

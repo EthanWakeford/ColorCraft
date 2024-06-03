@@ -12,6 +12,7 @@ const ColorInterface: React.FC<Props> = ({ colorState }) => {
   const handleAddNewGroup = () => {
     addColorGroup();
   };
+
   return (
     <div className=''>
       {colorState.map((colorGroup) => (

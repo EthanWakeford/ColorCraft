@@ -13,14 +13,12 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
     deleteColor(groupName, color.colorName);
   };
 
-  // @ts-ignore
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     modifyColor(groupName, color.colorName, { ...color, [name]: value });
   };
 
-  // @ts-ignore
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       console.log('hello');
     }

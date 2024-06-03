@@ -31,7 +31,7 @@ const ColorGroup: React.FC<Props> = ({ colorGroup }) => {
         </button>
       </div>
       {colorGroup.colors.map((color, index) => (
-        <Color key={index} color={color} />
+        <Color key={index} color={color} groupName={colorGroup.groupName} />
       ))}
       {colorGroup.colors.length < 10 && (
         <div className='flex size-32 items-center justify-center'>

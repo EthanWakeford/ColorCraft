@@ -1,28 +1,25 @@
-import { useState } from 'react';
+import { useColorStore } from '../colorStore';
 
 interface Props {
   color: Color;
+  groupName: string;
 }
 
-const Color: React.FC<Props> = ({ color }) => {
-  const [formState, setFormState] = useState<Color>({
-    colorName: color.colorName,
-    hue: color.hue,
-    saturation: color.saturation,
-    lightness: color.lightness,
-  });
+const Color: React.FC<Props> = ({ color, groupName }) => {
+  const modifyColor = useColorStore((state) => state.modifyColor);
 
+  // @ts-ignore
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    console.log(e.target);
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    modifyColor(groupName, color.colorName, { ...color, [name]: value });
   };
 
-  console.log(formState);
+  // @ts-ignore
+  const handleKeyDown = (e: any) => {
+    if (e.key === 'Enter') {
+      console.log('hello');
+    }
+  };
 
   return (
     <div
@@ -40,8 +37,9 @@ const Color: React.FC<Props> = ({ color }) => {
               type='text'
               defaultValue={color.colorName}
               name='colorName'
-              value={formState.colorName}
+              value={color.colorName}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
             />
           </div>
           <div className='flex justify-between'>
@@ -52,8 +50,9 @@ const Color: React.FC<Props> = ({ color }) => {
                 type='text'
                 defaultValue={color.hue}
                 name='hue'
-                value={formState.hue}
+                value={color.hue}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div className='justify-between'>
@@ -63,8 +62,9 @@ const Color: React.FC<Props> = ({ color }) => {
                 type='text'
                 defaultValue={color.saturation}
                 name='saturation'
-                value={formState.saturation}
+                value={color.saturation}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div className='justify-between'>
@@ -74,8 +74,9 @@ const Color: React.FC<Props> = ({ color }) => {
                 type='text'
                 defaultValue={color.lightness}
                 name='lightness'
-                value={formState.lightness}
+                value={color.lightness}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
               />
             </div>
           </div>

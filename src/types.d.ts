@@ -1,4 +1,5 @@
 type Color = {
+  colorName: string;
   hue: string;
   saturation: string;
   lightness: string;

@@ -36,7 +36,7 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
         <div className='flex flex-col justify-end bg-neutral-800 p-1'>
           <div className='flex justify-between'>
             <button className='hover:scale-105' onClick={handleDeleteColor}>
-              <Icon className='size-6' icon='mdi:close'></Icon>
+              <Icon className='size-4' icon='mdi:close'></Icon>
             </button>
             <p className='text-sm'>Name</p>
             <input

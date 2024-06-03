@@ -12,7 +12,10 @@ const ColorGroup: React.FC<Props> = ({ colorGroup }) => {
 
   const handleAddColor = () => {
     console.log(colorGroup.colors.slice(-1));
-    addColorToGroup(colorGroup.groupName, colorGroup.colors.slice(-1)[0]);
+    addColorToGroup(colorGroup.groupName, {
+      ...colorGroup.colors[colorGroup.colors.length - 1],
+      colorName: String(colorGroup.colors.length + 1),
+    });
   };
 
   const handleDeleteGroup = () => {

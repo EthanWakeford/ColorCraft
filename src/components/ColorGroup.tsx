@@ -14,7 +14,7 @@ const ColorGroup: React.FC<Props> = ({ colorGroup }) => {
   };
 
   return (
-    <div className='flex w-full'>
+    <div className='flex w-full flex-wrap'>
       <div className='size-32 text-left'>
         <h2>{colorGroup.groupName}</h2>
       </div>

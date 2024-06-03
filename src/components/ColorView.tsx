@@ -13,7 +13,7 @@ const ColorView: React.FC = () => {
   console.log(colorState);
 
   return (
-    <div className='h-full bg-white p-8 text-center text-black dark:bg-black dark:text-white'>
+    <div className='min-h-full bg-white p-8 text-center text-black dark:bg-black dark:text-white'>
       <button
         onClick={handleThemeToggle}
         className='mb-8 rounded-md bg-black p-4 text-white dark:bg-white dark:text-black'

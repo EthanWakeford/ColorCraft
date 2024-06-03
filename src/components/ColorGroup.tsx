@@ -10,7 +10,8 @@ const ColorGroup: React.FC<Props> = ({ colorGroup }) => {
   const addColorToGroup = useColorStore((state) => state.addColorToGroup);
 
   const handleAddColor = () => {
-    addColorToGroup(colorGroup.groupName);
+    console.log(colorGroup.colors.slice(-1));
+    addColorToGroup(colorGroup.groupName, colorGroup.colors.slice(-1)[0]);
   };
 
   return (
@@ -21,14 +22,16 @@ const ColorGroup: React.FC<Props> = ({ colorGroup }) => {
       {colorGroup.colors.map((color, index) => (
         <Color key={index} color={color} />
       ))}
-      <div className='flex size-32 items-center justify-center'>
-        <button
-          onClick={handleAddColor}
-          className='size-12 rounded-md bg-white text-5xl text-black hover:bg-black hover:text-white active:scale-110 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black'
-        >
-          <Icon icon={'mdi:plus'}></Icon>
-        </button>
-      </div>
+      {colorGroup.colors.length < 10 && (
+        <div className='flex size-32 items-center justify-center'>
+          <button
+            onClick={handleAddColor}
+            className='size-12 rounded-md bg-white text-5xl text-black hover:bg-black hover:text-white active:scale-110 dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black'
+          >
+            <Icon icon={'mdi:plus'}></Icon>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

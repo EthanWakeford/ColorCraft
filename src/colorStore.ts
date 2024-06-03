@@ -1,10 +1,11 @@
 import { create } from 'zustand';
+import * as O from 'optics-ts';
 
 interface ColorStore {
   colorState: ColorGroup[];
   setColors: (colors: ColorGroup[]) => void;
   addColorGroup: () => void;
-  addColorToGroup: (groupName: string) => void;
+  addColorToGroup: (groupName: string, color: Color) => void;
   theme: 'dark' | 'light';
   setTheme: (setting: 'dark' | 'light') => void;
 }
@@ -20,30 +21,27 @@ const defaultColors: Color[] = [
 const useColorStore = create<ColorStore>((set) => ({
   colorState: [{ groupName: 'Color Group 1', colors: defaultColors }],
   setColors: (colorState) => set(() => ({ colorState: colorState })),
-  addColorGroup: () =>
-    set((state) => ({
-      colorState: [
-        ...state.colorState,
-        {
-          groupName: `Color Group ${state.colorState.length + 1}`,
+  addColorGroup: () => {
+    set(
+      O.modify(O.optic<ColorStore>().prop('colorState'))((colorState) =>
+        colorState.concat({
+          groupName: `Color Group ${colorState.length + 1}`,
           colors: defaultColors,
-        },
-      ],
-    })),
-  addColorToGroup: (groupName) =>
-    set((state) => ({
-      colorState: state.colorState.map((colorGroup) =>
-        colorGroup.groupName === groupName
-          ? {
-              ...colorGroup,
-              colors: [
-                ...colorGroup.colors,
-                colorGroup.colors[colorGroup.colors.length - 1],
-              ],
-            }
-          : colorGroup
-      ),
-    })),
+        })
+      )
+    );
+  },
+  addColorToGroup: (groupName, color) => {
+    set(
+      O.modify(
+        O.optic<ColorStore>()
+          .prop('colorState')
+          .elems()
+          .when((c) => c.groupName === groupName)
+          .prop('colors')
+      )((colors) => colors.concat(color))
+    );
+  },
   theme: 'dark',
   setTheme: (setting) => set(() => ({ theme: setting })),
 }));

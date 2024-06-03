@@ -7,6 +7,11 @@ interface Props {
 
 const Color: React.FC<Props> = ({ color, groupName }) => {
   const modifyColor = useColorStore((state) => state.modifyColor);
+  const deleteColor = useColorStore((state) => state.deleteColor);
+
+  const handleDeleteColor = () => {
+    deleteColor(groupName, color.colorName);
+  };
 
   // @ts-ignore
   const handleInputChange = (e: any) => {
@@ -80,6 +85,9 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               />
             </div>
           </div>
+          <button className='' onClick={handleDeleteColor}>
+            Delete
+          </button>
         </div>
       </div>
     </div>

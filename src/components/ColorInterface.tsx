@@ -15,8 +15,8 @@ const ColorInterface: React.FC<Props> = ({ colorState }) => {
 
   return (
     <div className=''>
-      {colorState.map((colorGroup) => (
-        <ColorGroup key={colorGroup.groupName} colorGroup={colorGroup} />
+      {colorState.map((colorGroup, index) => (
+        <ColorGroup key={index} colorGroup={colorGroup} />
       ))}
       <div className='flex size-32 items-center justify-center'>
         <button

@@ -10,8 +10,6 @@ const ColorView: React.FC = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  console.log(colorState);
-
   return (
     <div className='min-h-full bg-white p-8 text-center text-black dark:bg-black dark:text-white'>
       <button

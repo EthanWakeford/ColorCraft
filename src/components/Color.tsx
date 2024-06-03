@@ -1,4 +1,5 @@
 import { useColorStore } from '../colorStore';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 interface Props {
   color: Color;
@@ -32,11 +33,14 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
       }}
     >
       <div className='absolute inset-0 z-50 text-white opacity-0 hover:opacity-100'>
-        <div className='flex flex-col justify-end bg-neutral-800'>
+        <div className='flex flex-col justify-end bg-neutral-800 p-1'>
           <div className='flex justify-between'>
-            <p>Name</p>
+            <button className='hover:scale-105' onClick={handleDeleteColor}>
+              <Icon className='size-6' icon='mdi:close'></Icon>
+            </button>
+            <p className='text-sm'>Name</p>
             <input
-              className='w-16 bg-neutral-100 text-black'
+              className='w-8 rounded-md bg-neutral-100 text-black'
               type='text'
               name='colorName'
               value={color.colorName}
@@ -44,11 +48,11 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               onKeyDown={handleKeyDown}
             />
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between pb-1'>
             <div className='justify-between'>
-              <p>H</p>
+              <p className='text-sm'>H</p>
               <input
-                className='w-8 bg-neutral-100 text-black'
+                className='w-8 rounded-md bg-neutral-100 text-black'
                 type='text'
                 name='hue'
                 value={color.hue}
@@ -57,9 +61,9 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               />
             </div>
             <div className='justify-between'>
-              <p>S</p>
+              <p className='text-sm'>S</p>
               <input
-                className='w-8 bg-neutral-100 text-black'
+                className='w-8 rounded-md bg-neutral-100 text-black'
                 type='text'
                 name='saturation'
                 value={color.saturation}
@@ -68,9 +72,9 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               />
             </div>
             <div className='justify-between'>
-              <p>L</p>
+              <p className='text-sm'>L</p>
               <input
-                className='w-8 bg-neutral-100 text-black'
+                className='w-8 rounded-md bg-neutral-100 text-black'
                 type='text'
                 name='lightness'
                 value={color.lightness}
@@ -79,9 +83,6 @@ const Color: React.FC<Props> = ({ color, groupName }) => {
               />
             </div>
           </div>
-          <button className='' onClick={handleDeleteColor}>
-            Delete
-          </button>
         </div>
       </div>
     </div>

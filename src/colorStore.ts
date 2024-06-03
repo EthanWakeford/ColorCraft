@@ -5,6 +5,7 @@ interface ColorStore {
   colorState: ColorGroup[];
   setColors: (colors: ColorGroup[]) => void;
   addColorGroup: () => void;
+  modifyColorGroup: (groupName: string, newGroup: ColorGroup) => void;
   deleteColorGroup: (groupName: string) => void;
   addColorToGroup: (groupName: string, color: Color) => void;
   modifyColor: (groupName: string, colorName: string, newColor: Color) => void;
@@ -32,6 +33,16 @@ const useColorStore = create<ColorStore>((set) => ({
           colors: defaultColors,
         })
       )
+    );
+  },
+  modifyColorGroup: (groupName: string, newGroup) => {
+    set(
+      O.modify(
+        O.optic<ColorStore>()
+          .prop('colorState')
+          .elems()
+          .when((colorGroup) => colorGroup.groupName === groupName)
+      )((colorGroup) => ({ ...colorGroup, groupName: newGroup.groupName }))
     );
   },
   deleteColorGroup: (groupName) => {

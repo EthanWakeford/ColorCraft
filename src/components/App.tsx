@@ -1,5 +1,6 @@
 import ColorView from './ColorView';
 import { useColorStore } from '../colorStore';
+import ImportExport from './ImportExport';
 
 const App: React.FC = () => {
   const theme = useColorStore((state) => state.theme);
@@ -13,6 +14,7 @@ const App: React.FC = () => {
           <h1 className='text-center text-3xl'>Craft Your Colors.</h1>
         </header>
         <ColorView />
+        <ImportExport />
       </main>
     </>
   );

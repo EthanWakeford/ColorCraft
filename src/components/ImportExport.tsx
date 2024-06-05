@@ -26,10 +26,28 @@ const ImportExport: React.FC = () => {
       7: 'hsl(245, 21%, 25%)',
       8: 'hsl(245, 25%, 15%)',
       9: 'hsl(245, 30%, 10%)',
-    }`;
+    },
+    primary: {
+      dk1: 'hsl(288, 100%, 16%)',
+      dk2: 'hsl(296, 95%, 21%)',
+      md1: 'hsl(305, 90%, 26%)',
+      md2: 'hsl(313, 90%, 31%)',
+      md3: 'hsl(321, 95%, 36%)',
+      lt1: 'hsl(330, 100%, 41%)',
+      lt2: 'hsl(338, 100%, 46%)',
+    },
+    secondary: {
+      dk1: 'hsl(17, 100%, 36%)',
+      dk2: 'hsl(22, 100%, 41%)',
+      md1: 'hsl(27, 100%, 46%)',
+      md2: 'hsl(32, 100%, 50%)',
+      md3: 'hsl(37, 100%, 55%)',
+      lt1: 'hsl(42, 100%, 60%)',
+      lt2: 'hsl(47, 100%, 66%)',
+    },`;
     // const obj = JSON.parse(val);
-    const obj = eval(val);
-    console.log(obj);
+    const output = convertToValidJson(val);
+    console.log(output);
   };
 
   return (
@@ -75,3 +93,33 @@ const ImportExport: React.FC = () => {
 };
 
 export default ImportExport;
+
+function convertToValidJson(inputString: string) {
+  // Replace single quotes with double quotes
+  let validJsonString = inputString.replace(/'/g, '"');
+
+  // Use a regular expression to quote unquoted keys
+  validJsonString = validJsonString.replace(/(\w+):/g, '"$1":');
+
+  // Remove trailing commas
+  // validJsonString = validJsonString.replace(/,\s*([}\]])/g, '$1');
+
+  // Remove trailing commas
+  validJsonString = validJsonString.replace(/,\s*([}\]])/g, '$1');
+
+  // Wrap the string in braces if it does not already start and end with braces
+  if (!validJsonString.trim().startsWith('{')) {
+    validJsonString = `{${validJsonString}}`;
+  }
+
+  console.log(validJsonString);
+
+  // Parse the JSON string
+  try {
+    const jsonObject = JSON.parse(validJsonString);
+    return jsonObject;
+  } catch (error) {
+    console.error('Invalid JSON format:', error);
+    return null;
+  }
+}
